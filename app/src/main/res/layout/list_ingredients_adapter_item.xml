@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/card_margin_1"
+    android:layout_marginBottom="@dimen/card_margin_1"
+    android:layout_marginLeft="@dimen/card_margin_2"
+    android:layout_marginRight="@dimen/card_margin_2"
+    app:cardElevation="@dimen/card_elev"
+    app:cardCornerRadius="@dimen/card_corner_rad">
+
+    <LinearLayout
+        android:id="@+id/recipe_detail_step_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/card_pad">
+
+        <TextView
+            android:id="@+id/ingredients_txtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/title_card"
+            android:gravity="center_horizontal|center_vertical"
+            tools:text="Ingredients"/>
+
+        <TextView
+            android:id="@+id/ingredients_txtView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/font"
+            android:gravity="center_horizontal|center_vertical"
+            tools:text="Ingredients"/>
+
+        <TextView
+            android:id="@+id/ingredients_txtView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/font"
+            android:gravity="center_horizontal|center_vertical"
+            tools:text="Ingredients"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

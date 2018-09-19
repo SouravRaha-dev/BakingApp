@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="progress_dimen">40dp</dimen>
+    <dimen name="ref_msg_btn">16sp</dimen>
+    <dimen name="btn_top_height">65dp</dimen>
+    <dimen name="app_bar_height">130dp</dimen>
+    <dimen name="tab_frame_width">400dp</dimen>
+    <dimen name="tab_view_width">1dp</dimen>
+    <dimen name="card_view_margin">5dp</dimen>
+    <dimen name="card_corner_rad">2dp</dimen>
+    <dimen name="card_view_img">150dp</dimen>
+    <dimen name="card_elev">7dp</dimen>
+    <dimen name="card_pad">20dp</dimen>
+    <dimen name="exo_player_height">300dp</dimen>
+    <dimen name="layout_margin">16dp</dimen>
+    <dimen name="layout_margin_top">8dp</dimen>
+    <dimen name="card_margin_1">5dp</dimen>
+    <dimen name="card_margin_2">10dp</dimen>
+</resources>

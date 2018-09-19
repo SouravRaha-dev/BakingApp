@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">BakingApp</string>
+    <string name="list_ingredients">List of ingredients</string>
+    <string name="step">step </string>
+    <string name="PARCELABLE_RECIPE">parcelable_recipe</string>
+    <string name="PARCELABLE_STEP">parcelable_step</string>
+    <string name="PARCELABLE_POSITION">parcelable_position</string>
+    <string name="error_view_type">"Invalid view type, value of "</string>
+    <string name="no_internet_connection">No internet connection!</string>
+    <string name="refresh">Refresh</string>
+    <string name="content_desc">Card View Img</string>
+    <string name="reload_app">REFRESH</string>
+    <string name="go_back">BACK</string>
+    <string name="go_ahead">NEXT</string>
+    <string name="name_exoplayer">VideoStep</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="shared_preferences">shared_preferences</string>
+    <string name="preference_recipe_name">pref_recipe_name</string>
+    <string name="preference_recipe_id">pref_recipe_id</string>
+    <string name="widget_message_no_recipe">No recipe selected\nClick here to select one!</string>
+    <string name="ID">id</string>
+    <string name="do_what">Do what you want!</string>
+    <string name="step_id">Step 1</string>
+</resources>

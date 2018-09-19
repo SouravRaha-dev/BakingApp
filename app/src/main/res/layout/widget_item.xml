@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="@dimen/card_margin_2">
+
+    <TextView
+        android:id="@+id/widget_item_name_ingredient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/title_card"
+        tools:text="Ingredients"/>
+
+    <TextView
+        android:id="@+id/widget_item_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/font"
+        tools:text="Ingredients"/>
+
+    <TextView
+        android:id="@+id/widget_item_measure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/font"
+        tools:text="Ingredients"/>
+</LinearLayout>
