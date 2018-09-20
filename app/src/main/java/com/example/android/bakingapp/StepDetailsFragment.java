@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -40,9 +41,10 @@ public class StepDetailsFragment extends Fragment {
     private SimpleExoPlayer exoPlayer;
     private Recipe recipe;
     private Step step;
-    private int id;
-    private boolean navigationButtons = true, playWhenReady = true;
-    private long positionExoPlayer = 0;
+    private int id, currentWindow;
+    private boolean navigationButtons = true, playWhenReady;
+    private long positionExoPlayer = C.TIME_UNSET;
+
     public StepDetailsFragment() { }
     public static StepDetailsFragment newInstance(Recipe recipe, int id, boolean navigationButtons) {
         StepDetailsFragment stepDetailsFragment = new StepDetailsFragment();
@@ -59,6 +61,16 @@ public class StepDetailsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_step_details, container, false);
         ButterKnife.bind(this, rootView);
         setRetainInstance(true);
+        if (savedInstanceState == null) {
+            playWhenReady = true;
+            currentWindow = 0;
+            positionExoPlayer = 0;
+        }
+        else {
+            playWhenReady = savedInstanceState.getBoolean("playWhenReady");
+            currentWindow = savedInstanceState.getInt("currentWindow");
+            positionExoPlayer = savedInstanceState.getLong("playBackPosition", C.TIME_UNSET);
+        }
         recipe = getArguments().getParcelable("RECIPE");
         id = getArguments().getInt("ID");
         step = recipe.getSteps().get(id);
@@ -111,12 +123,12 @@ public class StepDetailsFragment extends Fragment {
             LoadControl loadControl = new DefaultLoadControl();
             RenderersFactory renderersFactory = new DefaultRenderersFactory(getContext());
             exoPlayer = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector, loadControl);
-            playerView.setPlayer(exoPlayer);
             String userAgent = Util.getUserAgent(getContext(), getResources().getString(R.string.name_exoplayer));
             MediaSource mediaSource = new ExtractorMediaSource.Factory(new DefaultHttpDataSourceFactory(userAgent)).createMediaSource(Uri.parse(step.getVideoURL()));
             exoPlayer.prepare(mediaSource);
+            playerView.setPlayer(exoPlayer);
             exoPlayer.setPlayWhenReady(playWhenReady);
-            exoPlayer.seekTo(positionExoPlayer);
+            exoPlayer.seekTo(currentWindow, positionExoPlayer);
         }
         if (!step.getThumbnailURL().equals("") && NetworkUtils.isNetworkAvailable(getContext())) {
             if (NetworkUtils.isAnImage(step.getThumbnailURL()))
@@ -126,6 +138,7 @@ public class StepDetailsFragment extends Fragment {
     public void releasePlayer() {
         if (exoPlayer != null) {
             positionExoPlayer = exoPlayer.getCurrentPosition();
+            currentWindow = exoPlayer.getCurrentWindowIndex();
             playWhenReady = exoPlayer.getPlayWhenReady();
             exoPlayer.stop();
             exoPlayer.release();
@@ -165,6 +178,14 @@ public class StepDetailsFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean("playWhenReady", playWhenReady);
+        outState.putInt("currentWindow", currentWindow);
+        outState.putLong("playBackPosition", positionExoPlayer);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         if (Util.SDK_INT > 23)
@@ -181,8 +202,14 @@ public class StepDetailsFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (Util.SDK_INT <= 23)
-            releasePlayer();
+        if (Util.SDK_INT <= 23 && exoPlayer != null) {
+            positionExoPlayer = exoPlayer.getCurrentPosition();
+            playWhenReady = exoPlayer.getPlayWhenReady();
+            currentWindow = exoPlayer.getCurrentWindowIndex();
+            exoPlayer.stop();
+            exoPlayer.release();
+            exoPlayer = null;
+        }
     }
 
     @Override
